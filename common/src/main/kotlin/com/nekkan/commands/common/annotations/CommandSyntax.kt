@@ -5,4 +5,5 @@ package com.nekkan.commands.common.annotations
  * If applied to a function that is marked as [Command], it will set the syntax for that only command. Usually,
  * this is applied to Minecraft, but you can use for other environments with other usages.
  */
+@Target(AnnotationTarget.FUNCTION, AnnotationTarget.CLASS)
 annotation class CommandSyntax(val value: String)
