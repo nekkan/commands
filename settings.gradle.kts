@@ -13,3 +13,4 @@ pluginManagement {
 }
 
 includeBuild("dependency-loader")
+include(":common")
