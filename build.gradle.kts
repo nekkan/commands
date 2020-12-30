@@ -13,6 +13,9 @@ allprojects {
     repositories {
         mavenCentral()
         jcenter()
+        maven(url = "https://maven.fabricmc.net/") {
+            name = "FabricMC"
+        }
     }
 
     dependencies {

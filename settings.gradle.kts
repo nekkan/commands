@@ -6,6 +6,9 @@ pluginManagement {
         google()
         jcenter()
         gradlePluginPortal()
+        maven(url = "https://maven.fabricmc.net/") {
+            name = "FabricMC"
+        }
     }
 }
 
