@@ -1,0 +1,29 @@
+# Files of ran sessions of Minecraft client. Usually created when using Gradle.
+# These sessions use the latest version of `commands` by getting the latest commit and compiling it into a mod.
+run/*
+
+# Java or Kotlin compiled files.
+*.class
+
+# Package files. They should be included in releases only.
+*.jar
+*.zip
+*.rar
+*.gz
+
+# Virtual machine crash logs.
+hs_err_pid*
+
+# Gradle caching and build files. The caching in CI is provided over the `caching` GitHub Action.
+.gradle/
+build/
+**/build/
+
+# Avoid ignoring the Gradle wrapper files.
+!gradle-wrapper.jar
+!gradlew
+!gradlew.bat
+
+# Unnecessary IntelliJ IDEA files.
+.idea/
+*.iml
