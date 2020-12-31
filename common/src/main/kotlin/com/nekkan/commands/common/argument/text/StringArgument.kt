@@ -7,7 +7,7 @@ import com.nekkan.commands.common.argument.unexpectedEnd
 import com.nekkan.commands.common.consumeAll
 import com.nekkan.commands.common.hasEnded
 
-object StringArgument: TextArgument() {
+object StringArgument: TextArgument<String>() {
 
     override fun CharSequenceConsumer.parse(): ArgumentResult<String> {
         if(hasEnded) {

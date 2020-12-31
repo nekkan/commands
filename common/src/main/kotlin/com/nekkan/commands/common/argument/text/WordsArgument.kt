@@ -6,7 +6,7 @@ import com.nekkan.commands.common.consumeWord
 import com.nekkan.commands.common.dropWhitespaces
 import com.nekkan.commands.common.hasEnded
 
-object WordsArgument: TextArgument.WithTimes() {
+object WordsArgument: TextArgument.WithTimes<String>() {
 
     override inline val defaultTimes: Int
         get() = 1
