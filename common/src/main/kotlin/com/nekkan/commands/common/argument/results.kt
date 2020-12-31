@@ -7,10 +7,31 @@ inline fun <T: Any?> CharSequenceConsumer.unexpectedEnd(atChar: Int = 0): Argume
     return unexpected("End: more characters were expected but reached end.", atChar)
 }
 
-inline fun <T: Any?> CharSequenceConsumer.unexpected(text: String, atChar: Int = 0): ArgumentResult<T> {
+/**
+ * Returns a [ArgumentResult.Failure] indicating that the parsing have been not succeeded.
+ * @param text The text that will be passed after the `Unexpected` message.
+ */
+inline fun <T: Any?> CharSequenceConsumer.unexpected(text: CharSequence, atChar: Int = 0): ArgumentResult<T> {
     return ArgumentResult.Failure("Unexpected $text", atChar) as ArgumentResult<T>
 }
 
-inline fun <T: Any?> CharSequenceConsumer.expected(text: String, atChar: Int = 0): ArgumentResult<T> {
+/**
+ * Returns a [ArgumentResult.Failure] indicating that the parsing have been not succeeded.
+ * @param text The text that will be passed after the `Expected` message.
+ */
+inline fun <T: Any?> CharSequenceConsumer.expected(text: CharSequence, atChar: Int = 0): ArgumentResult<T> {
     return ArgumentResult.Failure("Expected $text", atChar) as ArgumentResult<T>
 }
+
+/**
+ * Returns a [ArgumentResult.Success] indicating that the parsing have been successful.
+ * @param item The [item] that will be passed to the [ArgumentResult].
+ */
+inline fun <T: Any?> CharSequenceConsumer.success(item: T) = ArgumentResult.Success(item, cursor)
+
+/**
+ * Returns a [ArgumentResult.Success] indicating that the parsing have been successful with the consumed [String]
+ * passed as item.
+ */
+inline fun CharSequenceConsumer.success() = ArgumentResult.Success("$consumed", cursor)
+
