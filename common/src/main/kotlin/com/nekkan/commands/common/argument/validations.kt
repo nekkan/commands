@@ -10,9 +10,9 @@ inline fun ArgumentResult.Default<*>.fail() = when(this) {
     else -> throw IllegalStateException("Expected argument result was Failure, but Success was provided.")
 }
 
-inline fun <T: Any?> ArgumentResult.Default<T>.asWordResult(wordsTaken: Int = 0) = when(this) {
+inline fun <T: Any?> ArgumentResult<T>.asWordResult(wordsTaken: Int = 0): WordArgumentResult<T> = when(this) {
     is ArgumentResult.Success -> WordArgumentResult.Success(listOf(item))
-    is ArgumentResult.Failure -> WordArgumentResult.Failure(reason, atChar, wordsTaken)
+    is ArgumentResult.Failure -> WordArgumentResult.Failure(reason, atChar, wordsTaken) as WordArgumentResult<T>
     else -> throw IllegalStateException("Expected argument result was Success or Failure, but ${this::class.simpleName} was provided.")
 }
 
