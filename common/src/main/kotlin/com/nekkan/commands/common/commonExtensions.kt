@@ -54,7 +54,7 @@ inline fun CharSequenceConsumer.dropWhitespaces() = dropWhile { it.isWhitespace(
 /**
  * Returns a consumption of the next word starting from the [CharSequenceConsumer.cursor].
  */
-inline fun CharSequenceConsumer.consumeWord() = consumeUntil { it.isWhitespace() }
+fun CharSequenceConsumer.consumeWord() = consumeUntil { it.isWhitespace() }
 
 /**
  * Clear everything, executes the [callback] and clears everything again.
@@ -67,3 +67,8 @@ inline fun CharSequenceConsumer.clear(callback: () -> Unit): String {
     consumed.clear()
     return result
 }
+
+/**
+ * Consumes all [CharSequenceConsumer.remaining] characters.
+ */
+fun CharSequenceConsumer.consumeAll() = consume(charSequence.length - cursor)
