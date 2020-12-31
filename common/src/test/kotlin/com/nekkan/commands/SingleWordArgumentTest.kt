@@ -1,6 +1,9 @@
 package com.nekkan.commands
 
 import com.nekkan.commands.common.argument.CharSequenceConsumer
+import com.nekkan.commands.common.argument.default
+import com.nekkan.commands.common.argument.ok
+import com.nekkan.commands.common.argument.text.SingleWordArgument
 import com.nekkan.commands.common.clear
 import com.nekkan.commands.common.consumeDroppingWhitespaces
 import com.nekkan.commands.common.consumeWord
@@ -16,7 +19,6 @@ class SingleWordArgumentTest {
         private const val string = "$firstWord $secondWord $thirdWord"
     }
 
-    private val consumer = CharSequenceConsumer(string)
 
     /**
      * Alternative:
@@ -36,10 +38,23 @@ class SingleWordArgumentTest {
      */
     @Test
     @Suppress("RedundantWith")
-    fun `consume all words`() = assertDoesNotThrow {
+    fun `consume all words internally`() = assertDoesNotThrow {
+        val consumer = CharSequenceConsumer(string)
         val first = consumer.clear { consumer.consumeWord() }
         val second = consumer.clear { consumer.consumeDroppingWhitespaces(1) }
         val third = consumer.clear { consumer.consumeDroppingWhitespaces(2) }
+        val value = "$first $second $third"
+        require(value == string) { "Expected '$string', but '$value' was provided." }
+    }
+
+    @Test
+    @Suppress("RedundantWith")
+    fun `consume all words`() = assertDoesNotThrow {
+        val secondWordIndex = string.indexOf(' ')
+        val thirdWordIndex = string.lastIndexOf(' ')
+        val first = SingleWordArgument.parse(string).default().ok()
+        val second = SingleWordArgument.parse(string, secondWordIndex).default().ok()
+        val third = SingleWordArgument.parse(string, thirdWordIndex).default().ok()
         val value = "$first $second $third"
         require(value == string) { "Expected '$string', but '$value' was provided." }
     }
