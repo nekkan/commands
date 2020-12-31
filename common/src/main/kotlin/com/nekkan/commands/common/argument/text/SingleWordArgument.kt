@@ -17,7 +17,7 @@ object SingleWordArgument: WordArgument() {
             dropWhitespaces()
             consumeWord(index)
         })
-        return WordArgumentResult.Success(word, 1)
+        return WordArgumentResult.Success(listOf(word))
     }
 
     override fun CharSequenceConsumer.parse(): ArgumentResult<String> {
