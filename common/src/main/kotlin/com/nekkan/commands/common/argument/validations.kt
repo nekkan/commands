@@ -12,7 +12,7 @@ inline fun ArgumentResult.Default<*>.fail() = when(this) {
 
 inline fun <T: Any?> ArgumentResult<T>.default() = when(this) {
     is ArgumentResult.Default<T> -> this
-    is WordArgumentResult.Success -> ArgumentResult.Success(item, wordsTaken)
+    is WordArgumentResult.Success -> ArgumentResult.Success(words.joinToString(" "), words.size)
     is WordArgumentResult.Failure -> ArgumentResult.Failure(reason, atChar)
     else -> throw IllegalStateException("Expected argument result was Default, but ${this::class.simpleName} was provided.")
 }
