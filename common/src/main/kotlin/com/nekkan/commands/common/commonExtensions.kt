@@ -72,3 +72,11 @@ inline fun CharSequenceConsumer.clear(callback: () -> Unit): String {
  * Consumes all [CharSequenceConsumer.remaining] characters.
  */
 fun CharSequenceConsumer.consumeAll() = consume(charSequence.length - cursor)
+
+/**
+ * Requires a [CharSequence] to be not blank.
+ */
+inline fun <T: CharSequence> requireNotBlank(text: T): T {
+    require(text.isNotBlank()) { "Given text was expected to be not blank." }
+    return text
+}
