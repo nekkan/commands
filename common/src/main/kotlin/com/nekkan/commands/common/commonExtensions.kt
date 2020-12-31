@@ -42,7 +42,7 @@ inline fun CharSequenceConsumer.consumeUntil(predicate: (Char) -> Boolean) {
  */
 inline fun CharSequenceConsumer.dropWhile(predicate: (Char) -> Boolean) {
     while(!hasEnded && predicate(character)) {
-        cursor++
+        ++cursor
     }
 }
 
@@ -55,6 +55,25 @@ inline fun CharSequenceConsumer.dropWhitespaces() = dropWhile { it.isWhitespace(
  * Returns a consumption of the next word starting from the [CharSequenceConsumer.cursor].
  */
 fun CharSequenceConsumer.consumeWord() = consumeUntil { it.isWhitespace() }
+
+/**
+ * Make a loop `x` times by consuming the word which `x` represents the given [times].
+ * @param times The times that the loop will run.
+ */
+fun CharSequenceConsumer.consumeWord(times: Int) {
+    return repeat(times) { consumeWord() }
+}
+
+/**
+ * Returns a consumption of the word located `x` times which `x` represents the given [times].
+ * @param times The [times] that a word will be consumed.
+ */
+fun CharSequenceConsumer.consumeDroppingWhitespaces(times: Int = 1) {
+    repeat(times) {
+        dropWhitespaces()
+        consumeWord()
+    }
+}
 
 /**
  * Clear everything, executes the [callback] and clears everything again.
