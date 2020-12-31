@@ -6,13 +6,12 @@ import com.nekkan.commands.common.consumeWord
 import com.nekkan.commands.common.dropWhitespaces
 import com.nekkan.commands.common.hasEnded
 
-data class WordsArgument(val times: Int): WordArgument() {
+object WordsArgument: TextArgument.WithTimes() {
 
-    companion object {
-        val one = WordsArgument(1)
-    }
+    override inline val defaultTimes: Int
+        get() = 1
 
-    override fun CharSequenceConsumer.parse(): ArgumentResult<String> {
+    override fun CharSequenceConsumer.parse(times: Int): ArgumentResult<String> {
         @OptIn(ExperimentalStdlibApi::class)
         val words = buildList {
             repeat(times) {
@@ -23,7 +22,7 @@ data class WordsArgument(val times: Int): WordArgument() {
                 add(clear { consumeWord() })
             }
         }
-        return WordArgumentResult.Success(words)
+        return TextArgumentResult.Success(words)
     }
 
 }

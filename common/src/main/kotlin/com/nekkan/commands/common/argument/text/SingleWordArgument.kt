@@ -1,27 +1,30 @@
 package com.nekkan.commands.common.argument.text
 
-import com.nekkan.commands.common.*
 import com.nekkan.commands.common.argument.ArgumentResult
 import com.nekkan.commands.common.argument.CharSequenceConsumer
-import com.nekkan.commands.common.argument.WordArgumentResult
+import com.nekkan.commands.common.argument.TextArgumentResult
 import com.nekkan.commands.common.argument.unexpectedEnd
+import com.nekkan.commands.common.consumeWord
+import com.nekkan.commands.common.dropWhitespaces
+import com.nekkan.commands.common.hasEnded
+import com.nekkan.commands.common.requireNotBlank
 
-object SingleWordArgument: WordArgument() {
+object SingleWordArgument: TextArgument.WithTimes() {
 
-    fun CharSequenceConsumer.parse(index: Int): ArgumentResult<String> {
+    override val defaultTimes: Int
+        get() = 1
+
+    override fun CharSequenceConsumer.parse(times: Int): ArgumentResult<String> {
         if(hasEnded) {
             return unexpectedEnd()
         }
         val cursorBefore = cursor
-        val word = requireNotBlank(clear {
+        repeat(times) {
             dropWhitespaces()
-            consumeWord(index)
-        })
-        return WordArgumentResult.Success(listOf(word))
-    }
-
-    override fun CharSequenceConsumer.parse(): ArgumentResult<String> {
-        return parse(1)
+            consumeWord()
+        }
+        val word = requireNotBlank("$this")
+        return TextArgumentResult.Success(listOf(word))
     }
 
 }

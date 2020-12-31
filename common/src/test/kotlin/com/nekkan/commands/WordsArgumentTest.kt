@@ -17,9 +17,9 @@ class WordsArgumentTest {
 
     @Test
     fun `consume all words`() {
-        val list = WordsArgument(3).parse(string).asWordResult().ok()
+        val list = WordsArgument.parse(string, list.size, 0).asWordResult().ok()
         require(list == Companion.list) {
-            "Expected list was [${Companion.list.joinToString()}], but ${list.joinToString()} was provided."
+            "Expected list was [${Companion.list.joinToString()}], but [${list.joinToString()}] was provided."
         }
     }
 
