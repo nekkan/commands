@@ -35,7 +35,7 @@ class CharSequenceConsumer(
             require(value >= 0) {
                 "Cursor must be positive, but `$value` was provided."
             }
-            require(value < charSequence.length) {
+            require(value <= charSequence.length) {
                 "Cursor must be less than the given text length, but `$value` was provided."
             }
             field = value
@@ -56,7 +56,7 @@ class CharSequenceConsumer(
      */
     fun consume(amount: Int) {
         val length = cursor + amount
-        require(length < charSequence.length) {
+        require(length <= charSequence.length) {
             "Taking $amount characters exceeded the charSequence length."
         }
         consumed.append(charSequence.substring(cursor, length))
@@ -68,8 +68,8 @@ class CharSequenceConsumer(
      * @throws IllegalArgumentException if the [cursor] would exceed the [charSequence] length.
      */
     fun consume() {
-        cursor++
         consumed.append(character)
+        cursor += 1
     }
 
     /**
@@ -77,10 +77,16 @@ class CharSequenceConsumer(
      * @throws IllegalArgumentException if the [amount] would exceed the [charSequence] length.
      */
     fun drop(amount: Int = 1) {
-        require(cursor + amount < charSequence.length) {
+        require(cursor + amount <= charSequence.length) {
             "Taking $amount characters exceeded the charSequence length."
         }
         cursor += amount
     }
+
+    /**
+     * Build the [StringBuilder] and return its value as a [String].
+     * @return The [consumed] values as a [String].
+     */
+    override fun toString() = consumed.toString()
 
 }
