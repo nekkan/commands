@@ -9,9 +9,9 @@ import com.nekkan.commands.common.dropWhitespaces
 import com.nekkan.commands.common.hasEnded
 import com.nekkan.commands.common.requireNotBlank
 
-object SingleWordArgument: TextArgument.WithTimes() {
+abstract class SingleWordArgument: TextArgument.WithTimes() {
 
-    override val defaultTimes: Int
+    final override val defaultTimes: Int
         get() = 1
 
     override fun CharSequenceConsumer.parse(times: Int): ArgumentResult<String> {
