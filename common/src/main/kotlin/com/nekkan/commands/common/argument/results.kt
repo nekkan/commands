@@ -35,3 +35,10 @@ inline fun <T: Any?> CharSequenceConsumer.success(item: T) = ArgumentResult.Succ
  */
 inline fun CharSequenceConsumer.success() = ArgumentResult.Success("$consumed", cursor)
 
+/**
+ * Returns a [ArgumentResult.Success] indicating that the parsing have failed with the consumed [String] passed as
+ * item.
+ */
+inline fun <T: Any?> CharSequenceConsumer.failure(reason: String): ArgumentResult<T> {
+    return ArgumentResult.Failure(reason, cursor) as ArgumentResult<T>
+}

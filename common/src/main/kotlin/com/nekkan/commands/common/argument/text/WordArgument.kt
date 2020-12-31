@@ -6,8 +6,8 @@ import com.nekkan.commands.common.argument.TextArgumentResult
 
 object WordArgument: SingleWordArgument<String>() {
 
-    override fun CharSequenceConsumer.parse(words: String): ArgumentResult<String> {
-        return TextArgumentResult.Success(listOf(words))
+    override fun CharSequenceConsumer.parse(word: String): ArgumentResult<String> {
+        return TextArgumentResult.Success(listOf(word))
     }
 
 }

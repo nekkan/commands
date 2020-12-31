@@ -26,6 +26,6 @@ abstract class SingleWordArgument<T>: TextArgument.WithTimes<T>() {
         return parse(word)
     }
 
-    protected abstract fun CharSequenceConsumer.parse(words: String): ArgumentResult<T>
+    protected abstract fun CharSequenceConsumer.parse(word: String): ArgumentResult<T>
 
 }
