@@ -9,9 +9,9 @@ import com.nekkan.commands.common.argument.text.WordArgument
 sealed class WordArgumentResult<T: Any?>: ArgumentResult<T>() {
 
     /**
-     * A successful parsing that produces an [item] and the amount of [wordsTaken].
+     * A successful parsing that produces a list of [words] and the amount of [wordsTaken].
      */
-    data class Success<T: Any?>(val item: T, val wordsTaken: Int): WordArgumentResult<T>()
+    data class Success<T: Any?>(val words: List<T>): WordArgumentResult<T>()
 
     /**
      * A failed parsing that couldn't turn the given [String] into a [T] item, producing the fail reason,
