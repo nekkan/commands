@@ -1,3 +1,4 @@
+import com.nekkan.commands.dependencyloader.CompilerArgs
 import com.nekkan.commands.dependencyloader.Dependencies
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -31,6 +32,7 @@ allprojects {
     tasks.withType<KotlinCompile> {
         kotlinOptions {
             jvmTarget = "1.8"
+            freeCompilerArgs += listOf(CompilerArgs.optIn)
         }
     }
 }
