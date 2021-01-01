@@ -13,4 +13,4 @@ pluginManagement {
 }
 
 includeBuild("dependency-loader")
-include(":common")
+include(":common", ":annotation-processor")
