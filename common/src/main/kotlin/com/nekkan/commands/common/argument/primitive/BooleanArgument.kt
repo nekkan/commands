@@ -1,4 +1,4 @@
-package com.nekkan.commands.common.argument.primitives
+package com.nekkan.commands.common.argument.primitive
 
 import com.nekkan.commands.common.argument.ArgumentResult
 import com.nekkan.commands.common.argument.CharSequenceConsumer
