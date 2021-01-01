@@ -5,11 +5,13 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("dependency-loader") apply false
     kotlin("jvm") version "1.4.21"
+    kotlin("kapt") version "1.4.21"
 }
 
 allprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "dependency-loader")
+    apply(plugin = "kotlin-kapt")
 
     repositories {
         mavenCentral()
